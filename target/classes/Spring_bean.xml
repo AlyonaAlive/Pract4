@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<context:annotation-config />
+	<bean id="phone" class="myclasses.FirstPhone" />
+	<bean id="phone1" class="myclasses.SecondPhone">
+		<constructor-arg value="102" />
+	</bean>
+	<bean id="myVideo" class="myclasses.MyVideo" />
+	<bean id="videoPhone" class="myclasses.VideoPhone">
+		<constructor-arg ref="myVideo" />
+		<constructor-arg value="103" />
+	</bean>
+	<bean id="myShop" class="myclasses.Shop" factory-method="getInstance" />
+	<bean id="firstSF" class="myclasses.SharePhoto" />
+	<bean id="ShareBook" class="myclasses.ShareBook" />
+	<bean id="mySuperPh" class="myclasses.SuperPhone" autowire="byName">
+		<property name="message" value="hello"></property>
+	</bean>
+	<bean id="SuperPuperPhone" class="myclasses.SuperPuperPhone">
+	</bean>
+	<bean id="SuperPuperPhoneNew" class="myclasses.SuperPuperPhoneNew">
+		<property name="files">
+			<map>
+				<entry key=" sharebook" value-ref="ShareBook" />
+			</map>
+		</property>
+	</bean>
+	<bean id ="aspect-test" class ="myclasses.Aspect_test"/>
+	<aop:aspectj-autoproxy />
+	
+		<!--  <aop:config>
+			<aop:aspect ref="aspect-test">
+				<aop:pointcut
+					expression="execution(* myclasses.Telephone.call(..))"
+					id="perform" />
+				<aop:before pointcut-ref="perform" method="startConnection" />
+				<aop:after-returning pointcut-ref="perform"
+					method="endConnection" />
+				<aop:after-throwing pointcut-ref="perform"
+					method="errorOfConnection" />
+			</aop:aspect>
+		</aop:config>
+-->
+</beans>
